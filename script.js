@@ -14,6 +14,44 @@ function checkIfCorrectIndex(index, arrayLength){
     return (index-1 >= 0) && (index+1 < arrayLength);
 }
 
+//check for symbols to decide the math
+function decideMath(tempArray){
+    let index = -1;
+    let mathType = "";
+    index = tempArray.indexOf("*");
+    //check if there is a * symbol to multiply
+    if(index !== -1) {
+        if(!checkIfCorrectIndex(index, tempArray.length)) return [-1, "ERR"];
+        return [index, "multiply"];
+    }
+    //check if there is a d symbol to divide
+    index = tempArray.indexOf("d");
+    if(index !== -1) {
+        if(!checkIfCorrectIndex(index, tempArray.length)) return [-1, "ERR"];
+        return [index, "divide"];
+    }
+    //check if there is a + symbol to add
+    index = tempArray.indexOf("+");
+    if(index !== -1) {
+        if(!checkIfCorrectIndex(index, tempArray.length)) return [-1, "ERR"];
+        return [index, "add"];
+    }
+    //check if there is a - symbol to subtract
+    index = tempArray.indexOf("-");
+    if(index !== -1) {
+        if(!checkIfCorrectIndex(index, tempArray.length)) return [-1, "ERR"];
+        return [index, "subtract"];
+    }
+
+    //default case for no symbols found
+    return [-1, ""];
+}
+
+
+
+
+
+
 
 function completeExpression(textArray){
 
@@ -23,13 +61,28 @@ function completeExpression(textArray){
     let result = 0;
     //continue until tempArray is only of length 1
     while(tempArray.length !== 1){
-        index = tempArray.indexOf("*");
-        if (index !== -1) {
-            if(!checkIfCorrectIndex(index, tempArray.length)) return "ERR";
-            result = multiply(tempArray[index-1], tempArray[index+1]);
-            tempArray.splice(index-1, 3, result);
-            console.log(tempArray);
+        
+        //get the preceding math symbol to execute first
+        const resultArray = decideMath(tempArray);
+        index = resultArray[0];
+        switch (resultArray[1]){
+            case "multiply":
+                result = (multiply(tempArray[index-1], tempArray[index+1])).toString();
+                break;
+            case "divide":
+                result = (divide(tempArray[index-1], tempArray[index+1])).toString();
+                break;
+            case "add":
+                result = (add(tempArray[index-1], tempArray[index+1])).toString();
+                break;
+            case "subtract":
+                result = (subtract(tempArray[index-1], tempArray[index+1])).toString();
+                break;
+            case "ERR":
+                return "ERR"
         }
+        tempArray.splice(index-1, 3, result);
+        
     }
     return tempArray;
 }
@@ -64,16 +117,25 @@ function evaluateString(){
         conciseArray.push(tempString);
         tempString = "";
     }
-    console.log(conciseArray);
     calcDisplay.textContent = completeExpression(conciseArray);
 
 }
 
 
-function multiply(a,b){
-    return a*b;
-}
 
+//Basic Math Functions
+function multiply(a,b){
+    return Number(a)*Number(b);
+}
+function divide(a,b){
+    return Number(a)/Number(b);
+}
+function add(a,b){
+    return Number(a)+Number(b);
+}
+function subtract(a,b){
+    return Number(a)-Number(b);
+}
 
 
 
