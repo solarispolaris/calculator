@@ -10,6 +10,33 @@ function clearScreen(){
     calcDisplay.textContent = "";
 }
 
+function checkIfCorrectIndex(index, arrayLength){
+    return (index-1 >= 0) && (index+1 < arrayLength);
+}
+
+
+function completeExpression(textArray){
+
+    const tempArray = textArray;
+    let index = -1;
+    let calculate = "";
+    let result = 0;
+    //continue until tempArray is only of length 1
+    while(tempArray.length !== 1){
+        index = tempArray.indexOf("*");
+        if (index !== -1) {
+            if(!checkIfCorrectIndex(index, tempArray.length)) return "ERR";
+            result = multiply(tempArray[index-1], tempArray[index+1]);
+            tempArray.splice(index-1, 3, result);
+            console.log(tempArray);
+        }
+    }
+    return tempArray;
+}
+
+
+
+
 function evaluateString(){
     const calcDisplay = document.querySelector(".calc-text");
     if(calcDisplay.textContent === "") return;
@@ -38,7 +65,13 @@ function evaluateString(){
         tempString = "";
     }
     console.log(conciseArray);
+    calcDisplay.textContent = completeExpression(conciseArray);
 
+}
+
+
+function multiply(a,b){
+    return a*b;
 }
 
 
