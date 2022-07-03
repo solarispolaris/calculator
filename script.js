@@ -10,7 +10,34 @@ function clearScreen(){
     calcDisplay.textContent = "";
 }
 
-function evaluateFunction(){
+function evaluateString(){
+    const calcDisplay = document.querySelector(".calc-text");
+    if(calcDisplay.textContent === "") return;
+    const textArray = Array.from(calcDisplay.textContent);
+    //new array to combine numbers together, separated from symbols
+    const conciseArray = [];
+    let tempString = "";
+
+    for(let itr = 0; itr < textArray.length; itr++){
+        //convert string into a number and check to see if it is not a symbol
+        const num = Number(textArray[itr]);
+        if(Number.isInteger(num)) tempString = tempString + textArray[itr];
+        else{
+            //push the joined number into the array if it currently exists
+            if(tempString !== ""){
+                conciseArray.push(tempString);
+                tempString = "";
+            }
+            //push the symbol into the array
+            conciseArray.push(textArray[itr]);
+        }
+    }
+    //push the last number if it exists
+    if(tempString !== ""){
+        conciseArray.push(tempString);
+        tempString = "";
+    }
+    console.log(conciseArray);
 
 }
 
@@ -36,7 +63,7 @@ function setUpCalcGrid(){
                 calcElement.addEventListener("click",clearScreen,0);
                 break;
             case "=":
-                calcElement.addEventListener("click",evaluateFunction,0);
+                calcElement.addEventListener("click",evaluateString,0);
                 break;
             default:
                 calcElement.addEventListener("click",keyPress,0);
