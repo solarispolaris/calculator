@@ -1,12 +1,18 @@
 //handles user input
 function keyPress(e){
-    const calcDisplay = document.querySelector(".calc-screen");
+    const calcDisplay = document.querySelector(".calc-text");
     let key = e.target.getAttribute("data-key");
-    calcDisplay.textContent = key;
+    calcDisplay.textContent = calcDisplay.textContent + key;
 }
 
+function clearScreen(){
+    const calcDisplay = document.querySelector(".calc-text");
+    calcDisplay.textContent = "";
+}
 
+function evaluateFunction(){
 
+}
 
 
 
@@ -25,7 +31,17 @@ function setUpCalcGrid(){
         calcElement.classList.add("calc-grid-element");
         calcElement.setAttribute("data-key", calcGrid[itr]);
         calcElement.textContent = calcGrid[itr];
-        calcElement.addEventListener("click",keyPress,0);
+        switch (calcGrid[itr]){
+            case "C":
+                calcElement.addEventListener("click",clearScreen,0);
+                break;
+            case "=":
+                calcElement.addEventListener("click",evaluateFunction,0);
+                break;
+            default:
+                calcElement.addEventListener("click",keyPress,0);
+        }
+        
         divGrid.appendChild(calcElement);
     }
 
