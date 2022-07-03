@@ -1,3 +1,18 @@
+//handles user input
+function keyPress(e){
+    const calcDisplay = document.querySelector(".calc-screen");
+    let key = e.target.getAttribute("data-key");
+    calcDisplay.textContent = key;
+}
+
+
+
+
+
+
+
+
+
 
 function setUpCalcGrid(){
     //the position of the keys in the grid of the calculator
@@ -10,6 +25,7 @@ function setUpCalcGrid(){
         calcElement.classList.add("calc-grid-element");
         calcElement.setAttribute("data-key", calcGrid[itr]);
         calcElement.textContent = calcGrid[itr];
+        calcElement.addEventListener("click",keyPress,0);
         divGrid.appendChild(calcElement);
     }
 
