@@ -4,23 +4,34 @@
     margin: 0;
 }
 
+body{
+    display: flex;
+    justify-content: center;
+}
+
+.calc-container, .calc-grid{
+    width: 450px;
+}
+
 .calc-grid-element{
     width: 100px;
     border-style: solid;
     border-width: 1px;
+    border-radius: 10%;
     
 }
 
 .calc-grid{
     display: flex;
     flex-wrap: wrap;
-    width: 440px;
     height: 500px;
     row-gap: 10px;
     column-gap: 10px;
-    padding-left: 10px;
+    padding: 20px 10px;
 }
 
 .calc-container{
-    width: 450px
+    background-color: #3b3434;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
 }
