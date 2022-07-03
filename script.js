@@ -101,7 +101,7 @@ function evaluateString(){
     for(let itr = 0; itr < textArray.length; itr++){
         //convert string into a number and check to see if it is not a symbol
         const num = Number(textArray[itr]);
-        if(Number.isInteger(num)) tempString = tempString + textArray[itr];
+        if(Number.isInteger(num) || textArray[itr] === ".") tempString = tempString + textArray[itr];
         else{
             //push the joined number into the array if it currently exists
             if(tempString !== ""){
@@ -117,6 +117,7 @@ function evaluateString(){
         conciseArray.push(tempString);
         tempString = "";
     }
+    console.log(conciseArray);
     calcDisplay.textContent = completeExpression(conciseArray);
 
 }
