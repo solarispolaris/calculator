@@ -2,7 +2,9 @@
 function keyPress(e){
     const calcDisplay = document.querySelector(".calc-text");
     let key = e.target.getAttribute("data-key");
-    calcDisplay.textContent = calcDisplay.textContent + key;
+    //prevent text from clipping out of the screen
+    if(!(calcDisplay.textContent.length >= 22))
+        calcDisplay.textContent = calcDisplay.textContent + key;
 }
 
 function clearScreen(){
@@ -70,6 +72,8 @@ function completeExpression(textArray){
                 result = (multiply(tempArray[index-1], tempArray[index+1])).toString();
                 break;
             case "divide":
+                //prevent divide by zero 
+                if(!Number(tempArray[index+1])) return "ERR: Divide By Zero";
                 result = (divide(tempArray[index-1], tempArray[index+1])).toString();
                 break;
             case "add":
@@ -81,6 +85,8 @@ function completeExpression(textArray){
             case "ERR":
                 return "ERR"
         }
+        //round the result if the value has more than 28 digits
+        if (result.length > 22) result = (Math.round(Number(result))).toString();
         tempArray.splice(index-1, 3, result);
         
     }
