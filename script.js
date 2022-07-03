@@ -117,7 +117,6 @@ function evaluateString(){
         conciseArray.push(tempString);
         tempString = "";
     }
-    console.log(conciseArray);
     calcDisplay.textContent = completeExpression(conciseArray);
 
 }
