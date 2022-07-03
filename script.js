@@ -18,14 +18,14 @@ function checkIfCorrectIndex(index, arrayLength){
 function decideMath(tempArray){
     let index = -1;
     let mathType = "";
-    index = tempArray.indexOf("*");
+    index = tempArray.indexOf("×");
     //check if there is a * symbol to multiply
     if(index !== -1) {
         if(!checkIfCorrectIndex(index, tempArray.length)) return [-1, "ERR"];
         return [index, "multiply"];
     }
     //check if there is a d symbol to divide
-    index = tempArray.indexOf("d");
+    index = tempArray.indexOf("÷");
     if(index !== -1) {
         if(!checkIfCorrectIndex(index, tempArray.length)) return [-1, "ERR"];
         return [index, "divide"];
@@ -144,7 +144,7 @@ function subtract(a,b){
 
 function setUpCalcGrid(){
     //the position of the keys in the grid of the calculator
-    const calcGrid = ["1","2","3","+","4","5","6","-","7","8","9","*","0","C","=","d"];
+    const calcGrid = ["1","2","3","+","4","5","6","-","7","8","9","×","0","C","=","÷"];
     const divGrid = document.querySelector(".calc-grid");
 
     //set up grid with class and data-key
