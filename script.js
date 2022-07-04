@@ -1,11 +1,17 @@
 
  //the position of the keys in the grid of the calculator
-const calcGrid = ["Del","C","1","2","3","+","4","5","6","-","7","8","9","×","0","=","÷"];
+const calcGrid = ["Del","C","1","2","3","+","4","5","6","-","7","8","9","×","0","=","÷", "."];
 
 
 
 
+//check if current number only has one or lest decimal point
+function checkForDots(str){
+    const numbers = str.split(/[+ - × ÷]/);
+    if(numbers[numbers.length-1].includes(".")) return true;
+    return false;
 
+}
 
 
 
@@ -14,6 +20,8 @@ const calcGrid = ["Del","C","1","2","3","+","4","5","6","-","7","8","9","×","0"
 function keyPress(e){
     const calcDisplay = document.querySelector(".calc-text");
     let key = e.target.getAttribute("data-key");
+    //prevent more than one decimal place
+    if(key === "." && checkForDots(calcDisplay.textContent)) return;
     //prevent text from clipping out of the screen
     if(!(calcDisplay.textContent.length >= 22))
         calcDisplay.textContent = calcDisplay.textContent + key;
