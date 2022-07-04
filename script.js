@@ -1,3 +1,15 @@
+
+ //the position of the keys in the grid of the calculator
+const calcGrid = ["Del","C","1","2","3","+","4","5","6","-","7","8","9","×","0","=","÷"];
+
+
+
+
+
+
+
+
+
 //handles user input
 function keyPress(e){
     const calcDisplay = document.querySelector(".calc-text");
@@ -7,11 +19,20 @@ function keyPress(e){
         calcDisplay.textContent = calcDisplay.textContent + key;
 }
 
+//clear the display
 function clearScreen(){
     const calcDisplay = document.querySelector(".calc-text");
     calcDisplay.textContent = "";
 }
 
+//remove the last command inputted
+function deleteLast(){
+    const calcDisplay = document.querySelector(".calc-text");
+    if (calcDisplay.textContent.length < 1) return;
+    calcDisplay.textContent = calcDisplay.textContent.slice(0, -1);
+}
+
+//makes sure that the operand is surrounded by numbers
 function checkIfCorrectIndex(index, arrayLength){
     return (index-1 >= 0) && (index+1 < arrayLength);
 }
@@ -149,8 +170,7 @@ function subtract(a,b){
 
 
 function setUpCalcGrid(){
-    //the position of the keys in the grid of the calculator
-    const calcGrid = ["1","2","3","+","4","5","6","-","7","8","9","×","0","C","=","÷"];
+
     const divGrid = document.querySelector(".calc-grid");
 
     //set up grid with class and data-key
@@ -165,6 +185,9 @@ function setUpCalcGrid(){
                 break;
             case "=":
                 calcElement.addEventListener("click",evaluateString,0);
+                break;
+            case "Del":
+                calcElement.addEventListener("click",deleteLast,0);
                 break;
             default:
                 calcElement.addEventListener("click",keyPress,0);
