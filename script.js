@@ -1,7 +1,8 @@
 
  //the position of the keys in the grid of the calculator
 const calcGrid = ["Del","C","1","2","3","+","4","5","6","-","7","8","9","×","0","=","÷", "."];
-
+//the number of digits that can be put on the screen
+const maxNumbers = 28;
 
 
 
@@ -23,7 +24,7 @@ function keyPress(e){
     //prevent more than one decimal place
     if(key === "." && checkForDots(calcDisplay.textContent)) return;
     //prevent text from clipping out of the screen
-    if(!(calcDisplay.textContent.length >= 22))
+    if(!(calcDisplay.textContent.length >= maxNumbers))
         calcDisplay.textContent = calcDisplay.textContent + key;
 }
 
@@ -115,7 +116,7 @@ function completeExpression(textArray){
                 return "ERR"
         }
         //round the result if the value has more than 28 digits
-        if (result.length > 22) result = (Math.round(Number(result))).toString();
+        if (result.length > maxNumbers) result = (Math.round(Number(result))).toString();
         tempArray.splice(index-1, 3, result);
         
     }

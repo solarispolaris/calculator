@@ -30,6 +30,34 @@ body{
 .calc-container{
     background-color: #525252;
     border-radius: 5%;
+    padding-top: 10px;
+}
+
+.calc-text{
+ 
+    font-size: 16px;
+    padding-right: 10px;
+    color: darkblue;
+}
+
+
+
+.calc-display{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calc-screen{
+    background-color: rgb(230, 205, 205);
+    height: 75px;
+    width: 300px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-top: 10px;
+    border-radius: 10%;
+    
 }
 
 [data-key = "Del"]{
@@ -50,4 +78,15 @@ body{
 [data-key = "="]{
     grid-column: 3;
     grid-row: 5
+}
+
+.page-header{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.page-title{
+    font-size: 32px;
+    font-weight: 800;
 }
