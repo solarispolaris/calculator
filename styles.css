@@ -9,6 +9,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(131, 119, 213);
 }
 
 .calc-grid-element{
@@ -49,7 +50,7 @@ body{
     align-items: center;
 }
 .calc-screen{
-    background-color: rgb(230, 205, 205);
+    background-color: rgb(230, 205, 205, .5);
     height: 75px;
     width: 300px;
     display: flex;
